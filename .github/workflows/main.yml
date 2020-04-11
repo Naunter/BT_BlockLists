@@ -36,7 +36,10 @@ jobs:
         cd BT_BlockLists
         chmod 740 ./update.sh
         ./update.sh
-        cp /tmp/bt_blocklists.gz /BT_BlockLists/bt_blocklists.gz
+            
+    - name: run the script
+      run: |
+        cp /tmp/bt_blocklists.gz BT_BlockLists/bt_blocklists.gz
     
     - uses: mikeal/publish-to-github-action@master
       env:

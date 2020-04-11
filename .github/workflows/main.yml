@@ -39,5 +39,5 @@ jobs:
         cp /tmp/bt_blocklists.gz /BT_BlockLists/bt_blocklists.gz
     
     - uses: mikeal/publish-to-github-action@master
-        env:
+      env:
           GITHUB_TOKEN: ${{ secrets.btblocklist }}

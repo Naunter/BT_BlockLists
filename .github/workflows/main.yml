@@ -32,18 +32,18 @@ jobs:
     
     - name: run the script
       run: |
-        git clone https://github.com/Naunter/BT_BlockLists.git
-        cd BT_BlockLists
-        chmod 740 ./update.sh
-        ./update.sh
-            
-    - name: copy the file to repo
-      run: |
-        cp /tmp/bt_blocklists.gz BT_BlockLists/bt_blocklists.gz
+        curl -A "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://www.iblocklist.com/lists.php \
+        | sed -n "s/.*value='\(http:.*\)'.*/\1/p" \
+        | sed "s/\&amp;/\&/g" \
+        | sed "s/http/\"http/g" \
+        | sed "s/gz/gz\"/g" \
+        | xargs curl -s -L \
+        | gunzip \
+        | egrep -v '^#' \
+        | gzip -  > /tmp/bt_blocklists.gz
     
     - name: Commit files
       run: |
-        cd BT_BlockLists
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
         git commit -m "update" -a
@@ -51,5 +51,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        directory: 'BT_BlockLists'
+        directory: '/tmp'
     

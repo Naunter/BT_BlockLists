@@ -39,12 +39,11 @@ jobs:
             
     - name: copy the file to repo
       run: |
-        ls -al /
-        ls -al BT_BlockLists
         cp /tmp/bt_blocklists.gz BT_BlockLists/bt_blocklists.gz
     
     - name: Commit files
       run: |
+        cd BT_BlockLists
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
         git commit -m "update" -a
@@ -52,3 +51,5 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        directory: 'BT_BlockLists'
+    

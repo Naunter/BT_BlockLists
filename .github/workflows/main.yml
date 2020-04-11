@@ -39,6 +39,8 @@ jobs:
             
     - name: copy the file to repo
       run: |
+        ls -al /
+        ls -al BT_BlockLists
         cp /tmp/bt_blocklists.gz BT_BlockLists/bt_blocklists.gz
     
     - name: Commit files

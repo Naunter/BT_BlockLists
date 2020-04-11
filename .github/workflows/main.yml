@@ -36,9 +36,8 @@ jobs:
         cd BT_BlockLists
         chmod 740 ./update.sh
         ./update.sh
+        cp /tmp/bt_blocklists.gz /BT_BlockLists/bt_blocklists.gz
     
-    - name : upload artifact
-      uses: actions/upload-artifact@master
-      with:
-        name: bt_blocklists.gz
-        path: /tmp/bt_blocklists.gz
+    - uses: mikeal/publish-to-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.btblocklist }}

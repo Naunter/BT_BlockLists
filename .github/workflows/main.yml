@@ -34,6 +34,7 @@ jobs:
       run: |
         git clone https://github.com/Naunter/BT_BlockLists.git
         cd BT_BlockLists
+        chmod 740 ./update.sh
         ./update.sh
     
     - name : upload artifact

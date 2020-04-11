@@ -37,10 +37,17 @@ jobs:
         chmod 740 ./update.sh
         ./update.sh
             
-    - name: run the script
+    - name: copy the file to repo
       run: |
         cp /tmp/bt_blocklists.gz BT_BlockLists/bt_blocklists.gz
     
-    - uses: mikeal/publish-to-github-action@master
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit files
+      run: |
+        git config --local user.email "naunter@github.com"
+        git config --local user.name "naunter"
+        git commit -m "update" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        directory: 'BT_BlockLists'

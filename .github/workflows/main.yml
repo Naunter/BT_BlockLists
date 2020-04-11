@@ -23,15 +23,15 @@ jobs:
     - uses: actions/checkout@master
       
     - name: install denpends
-      run: | 
-      sudo apt-get update
-      sudo apt-get install -y install wget curl grep gzip findutils git
+      run: |
+        sudo apt-get update 
+        sudo apt-get install -y install wget curl grep gzip findutils git
     
     - name: run the script
       run: |
-      git clone https://github.com/Naunter/BT_BlockLists.git
-      cd BT_BlockLists
-      ./update.sh
+        git clone https://github.com/Naunter/BT_BlockLists.git
+        cd BT_BlockLists
+        ./update.sh
     
     - name : upload artifact
       uses: actions/upload-artifact@master

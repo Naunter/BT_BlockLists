@@ -47,14 +47,13 @@ jobs:
     
     - name: Commit files
       run: |
-        cd BT_BlockLists
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
-        git add .
+        git add -A
         git commit -m "update"
         
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    
+        directory: BT_BlockLists

@@ -30,6 +30,9 @@ jobs:
         sudo apt-get update 
         sudo apt-get install -y wget curl grep gzip findutils git
     
+    - name: git clone
+      run: git clone https://github.com/Naunter/BT_BlockLists.git
+    
     - name: run the script
       run: |
         curl -A "User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://www.iblocklist.com/lists.php \
@@ -40,16 +43,16 @@ jobs:
         | xargs curl -s -L \
         | gunzip \
         | egrep -v '^#' \
-        | gzip -  > /tmp/bt_blocklists.gz
+        | gzip -  > BT_BlockLists/bt_blocklists.gz
     
     - name: Commit files
       run: |
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
-        git commit -m "update" -i /tmp/bt_blocklists.gz
+        git commit -m "update" -i BT_BlockLists/bt_blocklists.gz
+        
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        directory: '/tmp'
     

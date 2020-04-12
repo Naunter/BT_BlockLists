@@ -47,9 +47,10 @@ jobs:
     
     - name: Commit files
       run: |
+        cd BT_BlockLists
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
-        git add BT_BlockLists
+        git add .
         git commit -m "update"
         
     - name: Push changes

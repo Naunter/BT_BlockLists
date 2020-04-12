@@ -49,7 +49,8 @@ jobs:
       run: |
         git config --local user.email "naunter@github.com"
         git config --local user.name "naunter"
-        git commit -m "update" -i BT_BlockLists/bt_blocklists.gz
+        git add BT_BlockLists/bt_blocklists.gz
+        git commit -m "update"
         
     - name: Push changes
       uses: ad-m/github-push-action@master

@@ -45,7 +45,7 @@ jobs:
       run: |
         check=`du -s bt_blocklists.gz | awk '{print $1}'`
 
-        if [ $check > 1000 ]
+        if [ $check < 1000 ]
         then
         exit 2
         fi

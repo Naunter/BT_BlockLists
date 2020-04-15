@@ -40,6 +40,15 @@ jobs:
         | gunzip \
         | egrep -v '^#' \
         | gzip -  > bt_blocklists.gz
+        
+    - name: check size
+      run: |
+        check=`du -s bt_blocklists.gz | awk '{print $1}'`
+
+        if [ "$check" < "1000" ]
+        then
+        exit 2
+        fi
     
     - name: Commit files
       run: |

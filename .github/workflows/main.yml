@@ -36,10 +36,10 @@ jobs:
         | sed "s/\&amp;/\&/g" \
         | sed "s/http/\"http/g" \
         | sed "s/gz/gz\"/g" \
-        | sed '/^$/d' \
         | xargs curl -s -L \
         | gunzip \
         | egrep -v '^#' \
+        | sed "/^$/d" \
         | gzip -  > bt_blocklists.gz
         
     - name: check size

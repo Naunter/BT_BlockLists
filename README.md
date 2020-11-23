@@ -3,7 +3,9 @@ Transmission block list
 
 # Usage
 1. copy `https://github.com/Naunter/BT_BlockLists/raw/master/bt_blocklists.gz` 
-2. paste the link to Transmission > Edit > Preferences > Privacy > Enable blocklist
+2. paste the link to Transmission > Settings > Peers > Blocklist
+   or 
+   paste the link to Transmission > Edit > Preferences > Privacy > Enable blocklist
 3. click update
 
 # Reference

@@ -39,7 +39,7 @@ jobs:
     - name: install dependencies
       run: |
         sudo apt-get update 
-        sudo apt-get install -y wget curl grep gzip findutils git
+        sudo apt-get install -y wget curl grep gzip findutils git coreutils
     
     - name: download from iblocklist
       run: |
@@ -60,6 +60,11 @@ jobs:
     - name: download from www.wael.name
       run: |
         curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://www.wael.name/wael.list.txt | sed "/^#.*/d" | grep -Ev "^[0-9][0-9][0-9]\.[0-9][0-9][0-9].*" >> bt_blocklists
+        
+    - name: remove duplicates
+      run: |
+        sort --unique bt_blocklists > bt_blocklists_deduplicated
+        mv bt_blocklists_deduplicated bt_blocklists
       
     - name: combine all files
       run: |

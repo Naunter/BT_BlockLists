@@ -19,6 +19,7 @@ curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefo
 
 curl -A "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0" -s https://raw.githubusercontent.com/waelisa/Best-blocklist/main/wael.list.txt | sed "/^#.*/d" | grep -Ev "^[0-9][0-9][0-9]\.[0-9][0-9][0-9].*" >> combined_1.txt
 
-sort --unique combined_1.txt > combined_2.txt
+# Use mapCIDR to aggregate the list to match CDIR subnets
+# mapcidr -cl combined_1.txt -aggregate > combined_2.txt
 
 gzip -c combined_2.txt > bt_blocklists.gz

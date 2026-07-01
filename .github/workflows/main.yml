@@ -1,0 +1,64 @@
+name: btblocklist
+
+on:
+  push:
+    branches:
+    - master
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: initialize
+      run: |
+        git config user.name github-actions
+        git config user.email github-actions@github.com
+    
+    - name: remove binary files from history (reduce the repo size)
+      run: |
+        git filter-branch --force --index-filter "git rm --cached --ignore-unmatch bt_blocklists.gz" --prune-empty --tag-name-filter cat -- --all
+        rm -rf .git/refs/original/
+        git reflog expire --expire=now --all
+        git gc --prune=now
+        git gc --aggressive --prune=now
+        
+   # - name: download from mirror.codebucket.de
+   #   run: |
+   #     wget https://mirror.codebucket.de/transmission/blocklist.p2p.gz -O bt_blocklists.gz
+   
+    - name: Run build script
+      run: |
+        chmod +x ./update.sh
+        ./update.sh
+      shell: bash
+        
+    - name: Push
+      run: |
+        git add .
+        git commit -m "auto update"
+        git push origin --force --all
+        du -sh .git
+        
+    - name: Delete the old release
+      uses: dev-drprasad/delete-tag-and-release@master
+      with:
+        delete_release: true
+        tag_name: master
+        repo: Naunter/BT_BlockLists
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Push the new release
+      uses: softprops/action-gh-release@v1
+      with:
+        name: bt_blocklists
+        tag_name: v.1
+        files: bt_blocklists.gz
+        
+        
+    

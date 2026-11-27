@@ -1,0 +1,13 @@
+# Reference from https://github.com/Naunter/BT_BlockLists/issues/10
+https://reputation.alienvault.com/reputation.generic
+https://www.binarydefense.com/banlist.txt
+https://lists.blocklist.de/lists/all.txt
+https://iplists.firehol.org/files/bruteforceblocker.ipset
+https://cinsscore.com/list/ci-badguys.txt
+https://iplists.firehol.org/files/cruzit_web_attacks.ipset
+https://www.darklist.de/raw.php
+https://rules.emergingthreats.net/blockrules/compromised-ips.txt
+https://feodotracker.abuse.ch/downloads/ipblocklist.txt
+https://iplists.firehol.org/files/nixspam.ipset
+https://sslbl.abuse.ch/blacklist/sslipblacklist.txt
+https://pgl.yoyo.org/adservers/iplist.php?ipformat=plain&showintro=0&mimetype=plaintext
